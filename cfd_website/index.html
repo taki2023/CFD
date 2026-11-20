@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TakiCFD — finite-volume CFD workbench</title>
+<meta name="description" content="TakiCFD: a 2-D, axisymmetric and 3-D CFD workbench — geometry, meshing, solvers and post-processing in one window.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="34" height="34">TakiCFD</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="docs.html">Documentation</a><a href="cases/index.html">Case studies</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 id="hero-title">From sketch to streamlines, in one window.</h1>
+    <p class="lead">TakiCFD is a finite-volume CFD workbench for 2-D, axisymmetric and 3-D flows: draw the geometry, mesh it,
+      set the physics, run the solver and post-process the results without leaving the application.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="docs.html">Read the documentation</a>
+      <a class="btn btn-ghost" href="cases/index.html">See the case studies</a>
+    </div>
+  </div>
+  <p class="hero-note">Background: flow past a cylinder — potential flow with a shed vortex street, drawn live in your browser.</p>
+</section>
+
+<section aria-labelledby="wf"><div class="wrap">
+  <h2 id="wf">Six steps, one model</h2>
+  <p class="lead">The window is organised as the work is done. Each step shows whether it is done, needs attention, or is out of date after a change.</p>
+  <ol class="steps">
+    <li><h3>Global definitions</h3><p>2-D, axisymmetric or 3-D; steady or transient; solver type, energy, gravity, turbulence.</p></li>
+    <li><h3>Geometry</h3><p>Constrained sketcher in 2-D; extrude, revolve and cut features on OpenCASCADE in 3-D.</p></li>
+    <li><h3>Mesh</h3><p>Triangles, quads or mixed in 2-D; tetrahedra in 3-D; inflation layers from a first-layer height.</p></li>
+    <li><h3>Physics</h3><p>Fluids and solids, boundary conditions, rotating zones (MRF, sliding mesh, overset).</p></li>
+    <li><h3>Calculation</h3><p>Solver settings, initialization, monitors and per-equation convergence criteria; pause and resume.</p></li>
+    <li><h3>Results</h3><p>Contours, streamlines, vectors, particles, line plots, reports and video export.</p></li>
+  </ol>
+</div></section>
+
+<section aria-labelledby="cap"><div class="wrap split">
+  <div>
+    <h2 id="cap">What it solves</h2>
+    <p class="lead">Incompressible and compressible flow, heat transfer in fluids and solids, laminar and turbulent, steady and transient.</p>
+  </div>
+  <dl class="caps">
+    <div><dt>Pressure-based</dt><dd>SIMPLE, SIMPLEC, PISO and PIMPLE on collocated grids with Rhie–Chow interpolation; implicit time stepping.</dd></div>
+    <div><dt>Density-based</dt><dd>Riemann solvers (HLLC, Roe, AUSM+-up, HLLE, Rusanov) with MUSCL reconstruction, and a preconditioned solver for all speeds.</dd></div>
+    <div><dt>Turbulence</dt><dd>k–ε with wall functions, k–ω, k–ω SST and Spalart–Allmaras.</dd></div>
+    <div><dt>Heat transfer</dt><dd>Energy equation, conjugate conduction in solids, Boussinesq buoyancy.</dd></div>
+    <div><dt>Moving parts</dt><dd>Moving reference frame, sliding mesh and overset meshes for rotors, fans and moving bodies.</dd></div>
+    <div><dt>Post-processing</dt><dd>Global and user-defined variables (forces, mass flow, averages), live monitors, animations to MP4.</dd></div>
+  </dl>
+</div></section>
+
+<section aria-labelledby="look"><div class="wrap">
+  <h2 id="look">The application</h2>
+  <p class="lead">A native desktop window built with Qt, with light and dark themes. The solver runs in its own process, so the interface stays responsive during long runs.</p>
+  <div class="shots">
+    <figure class="shot"><img src="assets/img/screen-3d-results.jpg" alt="TakiCFD 3-D results: a velocity-magnitude contour on a cut plane through a duct, with the layer panel and a time bar" loading="lazy" width="1063" height="768">
+      <figcaption>3-D results: a contour on a cut plane, layered figures and the time bar of a transient run.</figcaption></figure>
+    <figure class="shot"><img src="assets/img/screen-monitors.jpg" alt="TakiCFD Calculation step: residual table with per-equation tolerances, monitors table and live monitor graphs" loading="lazy" width="1036" height="628">
+      <figcaption>Calculation: one tolerance per equation, live monitors of any variable, and convergence decided by both.</figcaption></figure>
+  </div>
+</div></section>
+
+<section aria-labelledby="val"><div class="wrap">
+  <h2 id="val">Checked against known answers</h2>
+  <p class="lead">Each case study sets up a problem with published experimental, numerical or exact results and compares TakiCFD with them.</p>
+  <ul class="case-list"><li><a class="case-item" href="cases/lid-driven-cavity.html"><svg viewBox="20 20 460 300" role="img" aria-label="Lid-driven cavity: square box of side L, top lid moving at speed U, other walls no-slip" xmlns="http://www.w3.org/2000/svg"><defs>
+<pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
+<pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
+<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d9581a"/></marker>
+<marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44556c"/></marker>
+</defs><rect x="150" y="60" width="200" height="200" fill="#fff" stroke="#0f2238" stroke-width="2.5"/>
+<rect x="142" y="60" width="8" height="208" fill="url(#hatch)"/><rect x="350" y="60" width="8" height="208" fill="url(#hatch)"/><rect x="150" y="260" width="200" height="8" fill="url(#hatch)"/>
+<line x1="150" y1="52" x2="350" y2="52" stroke="#1268b3" stroke-width="3" marker-end="url(#ab)"/>
+<path d="M250 70 C 330 80, 330 240, 250 250 C 170 240, 170 80, 250 70" fill="none" stroke="#1268b3" stroke-opacity=".35" stroke-width="1.5" marker-end="url(#ab)"/>
+<line x1="250" y1="60" x2="250" y2="260" stroke="#44556c" stroke-dasharray="4 4"/><line x1="150" y1="160" x2="350" y2="160" stroke="#44556c" stroke-dasharray="4 4"/>
+</svg><div><h3>Lid-driven cavity</h3><p>The classic first test of an incompressible solver: a square box whose lid slides, driving one large vortex.</p><span class="ref">Compared with: Ghia, Ghia & Shin (1982)</span></div></a></li><li><a class="case-item" href="cases/flow-over-cylinder.html"><svg viewBox="0 20 530 270" role="img" aria-label="Flow over a cylinder of diameter D in a rectangular domain with inlet, outlet and slip side walls" xmlns="http://www.w3.org/2000/svg"><defs>
+<pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
+<pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
+<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d9581a"/></marker>
+<marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44556c"/></marker>
+</defs><rect x="40" y="50" width="440" height="180" fill="#fff" stroke="#0f2238" stroke-width="1.5" stroke-dasharray="6 4"/>
+<circle cx="150" cy="140" r="18" fill="url(#hatch)" stroke="#0f2238" stroke-width="2"/>
+<line x1="14" y1="66" x2="36" y2="66" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="92" x2="36" y2="92" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="118" x2="36" y2="118" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="144" x2="36" y2="144" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="170" x2="36" y2="170" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="196" x2="36" y2="196" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="222" x2="36" y2="222" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M170 132 C 230 110, 260 170, 320 140 S 410 110, 470 140" fill="none" stroke="#1268b3" stroke-opacity=".35" stroke-width="1.5"/>
+</svg><div><h3>Flow over a cylinder</h3><p>A steady wake with two attached vortices at Re = 20 and 40, and periodic vortex shedding at Re = 100.</p><span class="ref">Compared with: Dennis & Chang (1970), Williamson (1996)</span></div></a></li><li><a class="case-item" href="cases/heat-exchanger.html"><svg viewBox="0 20 600 260" role="img" aria-label="Counter-flow heat exchanger: hot channel on top, cold channel below, separated by a conducting solid wall" xmlns="http://www.w3.org/2000/svg"><defs>
+<pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
+<pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
+<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d9581a"/></marker>
+<marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44556c"/></marker>
+</defs><rect x="80" y="60" width="360" height="60" fill="#fff" stroke="#0f2238" stroke-width="2"/>
+<rect x="80" y="120" width="360" height="16" fill="url(#solid)" stroke="#0f2238" stroke-width="1"/>
+<rect x="80" y="136" width="360" height="60" fill="#fff" stroke="#0f2238" stroke-width="2"/>
+<rect x="80" y="52" width="360" height="8" fill="url(#hatch)"/><rect x="80" y="196" width="360" height="8" fill="url(#hatch)"/>
+<line x1="44" y1="72" x2="76" y2="72" stroke="#d9581a" stroke-width="2" marker-end="url(#ah)"/><line x1="44" y1="90" x2="76" y2="90" stroke="#d9581a" stroke-width="2" marker-end="url(#ah)"/><line x1="44" y1="108" x2="76" y2="108" stroke="#d9581a" stroke-width="2" marker-end="url(#ah)"/><line x1="476" y1="148" x2="444" y2="148" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="476" y1="166" x2="444" y2="166" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="476" y1="184" x2="444" y2="184" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="120" y1="90" x2="400" y2="90" stroke="#d9581a" stroke-opacity=".35" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="400" y1="166" x2="120" y2="166" stroke="#1268b3" stroke-opacity=".35" stroke-width="1.5" marker-end="url(#ab)"/>
+</svg><div><h3>Counter-flow heat exchanger</h3><p>Two streams separated by a conducting wall: conjugate heat transfer compared with ε-NTU theory and laminar Nusselt numbers.</p><span class="ref">Compared with: Shah & London (1978), Incropera et al.</span></div></a></li><li><a class="case-item" href="cases/channel-flow.html"><svg viewBox="0 40 560 200" role="img" aria-label="Plane channel of height H with uniform inlet velocity developing into a parabolic profile" xmlns="http://www.w3.org/2000/svg"><defs>
+<pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
+<pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
+<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d9581a"/></marker>
+<marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44556c"/></marker>
+</defs><rect x="60" y="80" width="400" height="90" fill="#fff" stroke="none"/>
+<rect x="60" y="72" width="400" height="8" fill="url(#hatch)"/><rect x="60" y="170" width="400" height="8" fill="url(#hatch)"/>
+<line x1="60" y1="80" x2="460" y2="80" stroke="#0f2238" stroke-width="2"/><line x1="60" y1="170" x2="460" y2="170" stroke="#0f2238" stroke-width="2"/>
+<line x1="26" y1="92" x2="56" y2="92" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="110" x2="56" y2="110" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="125" x2="56" y2="125" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="140" x2="56" y2="140" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="158" x2="56" y2="158" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="410" y1="80" x2="410" y2="170" stroke="#44556c"/>
+<polyline points="410.0,80.0 423.3,84.5 435.2,89.0 445.7,93.5 454.8,98.0 462.5,102.5 468.8,107.0 473.7,111.5 477.2,116.0 479.3,120.5 480.0,125.0 479.3,129.5 477.2,134.0 473.7,138.5 468.8,143.0 462.5,147.5 454.8,152.0 445.7,156.5 435.2,161.0 423.3,165.5 410.0,170.0" fill="none" stroke="#1268b3" stroke-width="2.2"/>
+<line x1="410" y1="98.0" x2="451.8" y2="98.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="111.5" x2="470.7" y2="111.5" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="125.0" x2="477.0" y2="125.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="138.5" x2="470.7" y2="138.5" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="152.0" x2="451.8" y2="152.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/>
+<path d="M60 80 Q 200 125 260 125 Q 200 125 60 170" fill="none" stroke="#44556c" stroke-dasharray="4 4"/>
+</svg><div><h3>Laminar channel flow</h3><p>Flow developing between two plates into the exact parabolic Poiseuille profile — the simplest check of the viscous terms.</p><span class="ref">Compared with: Analytic (Poiseuille)</span></div></a></li></ul>
+  <div class="actions"><a class="btn btn-line" href="cases/index.html">All case studies</a></div>
+</div></section>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <strong style="color:#fff">TakiCFD</strong> — a 2-D and 3-D finite-volume CFD workbench.<br>
+      © <span data-year>2026</span> [Your name]. All rights reserved.
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="docs.html">Documentation</a><a href="cases/index.html">Case studies</a><a href="about.html">About</a></nav>
+  </div>
+</footer>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

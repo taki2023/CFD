@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — TakiCFD</title>
+<meta name="description" content="Install TakiCFD and learn the workflow: geometry, mesh, physics, calculation and results.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="34" height="34">TakiCFD</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="docs.html" aria-current="page">Documentation</a><a href="cases/index.html">Case studies</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="page-head"><div class="wrap">
+  <h1>Documentation</h1>
+  <p class="lead">How to install TakiCFD and take a case from an empty window to results.</p>
+</div></div>
+<div class="wrap case-grid">
+  <aside class="toc" aria-label="On this page"><h4>Contents</h4><ol>
+    <li><a href="#install">Installation</a></li><li><a href="#window">The window</a></li><li><a href="#global"> 1. Global definitions</a></li>
+    <li><a href="#geometry"> 2. Geometry</a></li><li><a href="#mesh"> 3. Mesh</a></li><li><a href="#physics"> 4. Physics</a></li>
+    <li><a href="#calc"> 5. Calculation</a></li><li><a href="#results"> 6. Results</a></li><li><a href="#threed">The 3-D workspace</a></li>
+    <li><a href="#solvers">Numerical methods</a></li><li><a href="#keys">Keyboard shortcuts</a></li></ol></aside>
+  <article class="doc">
+    <section><h2 id="install">Installation</h2>
+      <h3>Stand-alone (Windows)</h3>
+      <p>Unzip the <code>TakiCFD</code> folder anywhere and run <code>TakiCFD.exe</code>. No Python installation is needed.
+        To check an installation, run <code>TakiCFD.exe --selftest</code>: it tests the libraries, the mesher and the solver process
+        and writes a report to <code>~/.takicfd/selftest.txt</code>.</p>
+      <h3>From source</h3>
+<pre><code>pip install -r requirements.txt
+python main.py                  # or: python main.py path/to/case.json</code></pre>
+      <p>Required: NumPy, SciPy, Matplotlib, Triangle, PySide6, Pillow. The 3-D workspace adds PyVista, pyvistaqt and gmsh.
+        Optional packages make it faster: pyamg (multigrid pressure solver), numba (multi-core 3-D kernels) and pypardiso
+        (MKL direct solver for the density-based 2-D solvers).</p>
+    </section>
+
+    <section><h2 id="window">The window</h2>
+      <p>The header shows the six workflow steps. Each step's disc tells its state: a number when it is still to do, a green tick
+        when it is done, an orange mark when it needs attention (hover for the reason). Calculation and Results turn orange when the
+        model changes after the last run.</p>
+      <p>Below the header, the ribbon holds the tools of the current step; the model tree on the left lists everything in the case;
+        the bottom panel has the messages, the live progress graph and the log. <em>File ▸ Appearance</em> switches between light and dark
+        themes, accent colours and icon styles.</p>
+    </section>
+
+    <section><h2 id="global"> 1. Global definitions</h2>
+      <ul>
+        <li><strong>Dimension</strong>: 2-D planar, 2-D axisymmetric or 3-D.</li>
+        <li><strong>Time</strong>: steady, or transient with a fixed time step or an automatic one from a CFL number.</li>
+        <li><strong>Solver type</strong>: pressure-based (incompressible and weakly compressible) or density-based (compressible, ideal gas).</li>
+        <li><strong>Physics switches</strong>: energy equation, gravity, turbulence model, operating pressure.</li>
+      </ul>
+    </section>
+
+    <section><h2 id="geometry"> 2. Geometry</h2>
+      <p>The 2-D sketcher draws lines, arcs, circles, splines and rectangles with live snapping. Constraints (coincident, horizontal,
+        vertical, tangent) and smart dimensions keep the sketch parametric; the badge shows the remaining degrees of freedom. Closed
+        loops become <strong>surfaces</strong>, which are the regions that get a mesh and a material.</p>
+      <p>Move, mirror and pattern tools show a dashed preview before they are applied. Airfoil profiles can be imported from the bundled library.</p>
+    </section>
+
+    <section><h2 id="mesh"> 3. Mesh</h2>
+      <ul>
+        <li><strong>Cell type</strong> per surface: triangles, quadrilaterals or mixed; neighbouring surfaces share the same nodes on their common curves.</li>
+        <li><strong>Size</strong>: maximum element size, maximum aspect ratio and smoothing level; local refinement along chosen curves with a growth ratio.</li>
+        <li><strong>Inflation layers</strong> on walls and interior curves, defined by the first-layer height with either the number of layers or the total thickness.</li>
+        <li><strong>Quality</strong>: minimum angle, aspect ratio and skewness are reported after every build. <em>Check Conformity</em> and <em>Make Conformal</em> repair interfaces.</li>
+        <li><strong>Overset</strong>: a component mesh can overlap a background mesh for moving bodies.</li>
+      </ul>
+    </section>
+
+    <section><h2 id="physics"> 4. Physics</h2>
+      <p>Materials (from the library or user-defined) are assigned to surfaces in 2-D and volumes in 3-D; solids conduct heat.
+        Boundary conditions are assigned to curves (2-D) or surfaces (3-D):</p>
+      <ul>
+        <li><strong>Velocity inlet</strong>: normal speed or vector, temperature, turbulence intensity and length scale.</li>
+        <li><strong>Pressure outlet</strong>: static gauge pressure.</li>
+        <li><strong>Wall</strong>: no-slip, free-slip or moving; adiabatic, fixed temperature or heat flux.</li>
+        <li><strong>Symmetry</strong>, and the axis in axisymmetric cases.</li>
+      </ul>
+      <p>Anything left unassigned is a no-slip adiabatic wall. <strong>Rotating zones</strong> use a moving reference frame (steady or transient), a sliding mesh or an overset mesh (transient).</p>
+    </section>
+
+    <section><h2 id="calc"> 5. Calculation</h2>
+      <p>The Study Setup card has three tabs.</p>
+      <ul>
+        <li><strong>Solver</strong>: iteration limits, default tolerance, under-relaxation factors and discretisation schemes.</li>
+        <li><strong>Initialization</strong>: start values for every cell, and patches that give chosen regions other start values (a hot solid, a jet, fluid at rest).</li>
+        <li><strong>Monitors &amp; Convergence</strong>: one tolerance per equation (tick the ones that count for convergence), and monitors of any global or user-defined variable — for example inlet minus outlet mass flow.</li>
+      </ul>
+      <p>A steady run is converged when every ticked residual is below its tolerance and every ticked monitor has settled. A transient
+        run uses the residual table inside every time step and can end by itself once the monitors reach a steady or periodic state.</p>
+      <p><strong>Pause</strong> writes the current solution so it can be inspected in Results and resumed; <strong>Stop</strong> ends the run and keeps the last completed iteration.</p>
+    </section>
+
+    <section><h2 id="results"> 6. Results</h2>
+      <p>Results are organised in figures, each a stack of layers: contours, streamlines, velocity vectors, particle tracks, the mesh,
+        line plots and the convergence history. Colour bars can be edited; transient results have a time bar and export to MP4 or GIF.</p>
+      <p><strong>Global variables</strong> integrate over curves, surfaces or regions (forces, mass flow, mean values, heat flux).
+        <strong>User-defined variables</strong> combine them with an expression, and both can be monitored during the run.</p>
+    </section>
+
+    <section><h2 id="threed">The 3-D workspace</h2>
+      <p>Switch it on in <em>Global Definitions ▸ Dimension ▸ 3D</em>. The ribbon of each step swaps to its 3-D version.</p>
+      <ul>
+        <li><strong>Geometry</strong>: sketches on reference planes or model faces; extruded and revolved bosses and cuts with live previews; drag the arrow to set the depth.</li>
+        <li><strong>Mesh</strong>: tetrahedra (gmsh) with curvature refinement, local sizes and prism inflation layers grown from chosen surfaces.</li>
+        <li><strong>Results</strong>: contours on cut planes, surface contours (pressure, wall shear, y⁺, heat flux), vectors, streamlines, iso-surfaces, volume and surface reports.</li>
+      </ul>
+      <p>A project saves the model in its <code>.json</code>; the mesh and the last results are kept next to it so a reopened case needs no re-meshing.</p>
+    </section>
+
+    <section><h2 id="solvers">Numerical methods</h2>
+      <dl class="caps">
+        <div><dt>Discretisation</dt><dd>Cell-centred finite volumes on unstructured meshes; least-squares gradients; non-orthogonal correction; upwind or limited second-order convection.</dd></div>
+        <div><dt>Pressure-based</dt><dd>SIMPLE, SIMPLEC, PISO, PIMPLE with Rhie–Chow interpolation; algebraic multigrid for the pressure equation in 3-D.</dd></div>
+        <div><dt>Density-based</dt><dd>HLLC, Roe, AUSM+-up, HLLE and Rusanov fluxes, MUSCL reconstruction with limiters, explicit or implicit time integration, local time stepping; Weiss–Smith preconditioning for low Mach numbers.</dd></div>
+        <div><dt>Turbulence</dt><dd>Standard k–ε with wall functions, Wilcox k–ω, Menter k–ω SST, Spalart–Allmaras; wall distance from a Poisson equation.</dd></div>
+        <div><dt>Heat</dt><dd>Energy equation with conjugate conduction in solids and Boussinesq buoyancy.</dd></div>
+      </dl>
+    </section>
+
+    <section><h2 id="keys">Keyboard shortcuts</h2>
+      <dl class="caps">
+        <div><dt><kbd>Ctrl</kbd> + <kbd>1</kbd> … <kbd>6</kbd></dt><dd>Go to a workflow step.</dd></div>
+        <div><dt><kbd>Esc</kbd></dt><dd>Cancel the current tool.</dd></div>
+        <div><dt><kbd>Enter</kbd></dt><dd>Finish the current sketch entity.</dd></div>
+        <div><dt>Mouse wheel</dt><dd>Zoom at the cursor; left-drag pans, right-drag zooms a box (2-D views).</dd></div>
+      </dl>
+      <p class="muted"><em>Help ▸ About</em> in the application lists every shortcut.</p>
+    </section>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <strong style="color:#fff">TakiCFD</strong> — a 2-D and 3-D finite-volume CFD workbench.<br>
+      © <span data-year>2026</span> [Your name]. All rights reserved.
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="docs.html">Documentation</a><a href="cases/index.html">Case studies</a><a href="about.html">About</a></nav>
+  </div>
+</footer>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

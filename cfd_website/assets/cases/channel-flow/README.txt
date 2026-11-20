@@ -1,0 +1,1 @@
+Put this case's figures here (mesh.png, mesh-zoom.png, velocity.png, streamlines.png, convergence.png and the comparison chart named in the page). Then replace the matching placeholder in cases/channel-flow.html — each placeholder has an HTML comment with the exact <img> line to use.

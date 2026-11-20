@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laminar channel flow — TakiCFD case study</title>
+<meta name="description" content="Flow developing between two plates into the exact parabolic Poiseuille profile — the simplest check of the viscous terms.">
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img src="../assets/img/logo.png" alt="" width="34" height="34">TakiCFD</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main"><a href="../index.html">Home</a><a href="../docs.html">Documentation</a><a href="../cases/index.html" aria-current="page">Case studies</a><a href="../about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Case studies</a> / Laminar channel flow</div>
+  <h1>Laminar channel flow</h1>
+  <p class="lead">Flow developing between two plates into the exact parabolic Poiseuille profile — the simplest check of the viscous terms.</p>
+  <span class="status">Results in preparation</span>
+  <dl class="params"><div><dt>Reynolds number</dt><dd>Re = ŪD_h/ν, D_h = 2H</dd></div><div><dt>Flow</dt><dd>Laminar, steady</dd></div><div><dt>Dimension</dt><dd>2-D (also 3-D)</dd></div><div><dt>Reference</dt><dd>Exact solution</dd></div></dl>
+</div></div>
+<div class="wrap case-grid">
+  <aside class="toc" aria-label="On this page"><h4>On this page</h4><ol>
+    <li><a href="#problem">Problem</a></li><li><a href="#geometry">Geometry and boundary conditions</a></li>
+    <li><a href="#mesh">Mesh</a></li><li><a href="#setup">Solver set-up</a></li><li><a href="#results">Results</a></li>
+    <li><a href="#comparison">Comparison</a></li><li><a href="#report">Report</a></li><li><a href="#references">References</a></li></ol></aside>
+  <article class="doc">
+    <section><h2 id="problem">Problem</h2><p>Fluid enters a long channel of height <span class="math">H</span> with a uniform velocity <span class="math">Ū</span>.
+Friction at the walls slows the fluid near them and speeds up the core until, after an entrance length, the profile stops changing.
+The fully developed flow has an exact solution, so the error of the solver can be measured, not just estimated.</p></section>
+    <section><h2 id="geometry">Geometry and boundary conditions</h2>
+      <figure class="figure"><svg viewBox="0 40 560 200" role="img" aria-label="Plane channel of height H with uniform inlet velocity developing into a parabolic profile" xmlns="http://www.w3.org/2000/svg"><defs>
+<pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
+<pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
+<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d9581a"/></marker>
+<marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44556c"/></marker>
+</defs><rect x="60" y="80" width="400" height="90" fill="#fff" stroke="none"/>
+<rect x="60" y="72" width="400" height="8" fill="url(#hatch)"/><rect x="60" y="170" width="400" height="8" fill="url(#hatch)"/>
+<line x1="60" y1="80" x2="460" y2="80" stroke="#0f2238" stroke-width="2"/><line x1="60" y1="170" x2="460" y2="170" stroke="#0f2238" stroke-width="2"/>
+<line x1="26" y1="92" x2="56" y2="92" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="110" x2="56" y2="110" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="125" x2="56" y2="125" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="140" x2="56" y2="140" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="26" y1="158" x2="56" y2="158" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="410" y1="80" x2="410" y2="170" stroke="#44556c"/>
+<polyline points="410.0,80.0 423.3,84.5 435.2,89.0 445.7,93.5 454.8,98.0 462.5,102.5 468.8,107.0 473.7,111.5 477.2,116.0 479.3,120.5 480.0,125.0 479.3,129.5 477.2,134.0 473.7,138.5 468.8,143.0 462.5,147.5 454.8,152.0 445.7,156.5 435.2,161.0 423.3,165.5 410.0,170.0" fill="none" stroke="#1268b3" stroke-width="2.2"/>
+<line x1="410" y1="98.0" x2="451.8" y2="98.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="111.5" x2="470.7" y2="111.5" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="125.0" x2="477.0" y2="125.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="138.5" x2="470.7" y2="138.5" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="152.0" x2="451.8" y2="152.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/>
+<path d="M60 80 Q 200 125 260 125 Q 200 125 60 170" fill="none" stroke="#44556c" stroke-dasharray="4 4"/>
+<g class="lbl">
+<text x="26" y="198" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">Inlet: uniform u = Ū</text>
+<text x="460" y="198" text-anchor="end" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">Outlet: p = 0</text>
+<text x="260" y="62" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">No-slip walls</text>
+<text x="150" y="128" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">developing</text>
+<text x="480" y="128" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">parabolic</text>
+<line x1="476" y1="80" x2="476" y2="104" stroke="#44556c"/>
+<line x1="44" y1="216" x2="460" y2="216" stroke="#44556c" marker-start="url(#ak)" marker-end="url(#ak)" opacity="0"/>
+<text x="60" y="230" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">Channel height H, length L ≫ entrance length</text></g></svg><figcaption>Computational domain and boundary conditions (schematic, not to scale).</figcaption></figure>
+      <div class="table-scroll"><table><caption>Boundary conditions</caption><thead><tr><th scope="col">Boundary</th><th scope="col">Type in TakiCFD</th><th scope="col">Condition</th></tr></thead><tbody><tr><td>Inlet</td><td>Velocity inlet</td><td>u = Ū, v = 0</td></tr><tr><td>Outlet</td><td>Pressure outlet</td><td>p = 0</td></tr><tr><td>Top and bottom</td><td>Wall</td><td>No-slip: u = v = 0</td></tr></tbody></table></div>
+    </section>
+    <section><h2 id="mesh">Mesh</h2><p>A structured quadrilateral mesh, refined towards the walls; three meshes give the order of accuracy.</p>
+      <div class="slots"><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/channel-flow/mesh.png" alt="Full mesh"> --><div class="slot"><div><strong>Full mesh</strong></div></div></figure><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/channel-flow/mesh-zoom.png" alt="Close-up"> --><div class="slot"><div><strong>Close-up</strong></div></div></figure></div>
+      <div class="table-scroll"><table><caption>Mesh statistics</caption><thead><tr><th scope="col">Mesh</th><th scope="col">Cells</th><th scope="col">Min. size</th><th scope="col">Max. aspect ratio</th></tr></thead><tbody><tr><td>Coarse</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Medium</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Fine</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr></tbody></table></div>
+    </section>
+    <section><h2 id="setup">Solver set-up</h2><dl class="caps"><div><dt>Solver</dt><dd>Pressure-based SIMPLE, steady</dd></div><div><dt>Length</dt><dd>Long enough for the flow to be fully developed before the outlet</dd></div><div><dt>Outputs</dt><dd>Velocity profile at the outlet, pressure gradient, friction factor</dd></div></dl></section>
+    <section><h2 id="results">Results</h2>
+      <p class="muted">Contours, streamlines and convergence history from TakiCFD will appear here.</p>
+      <div class="slots"><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/channel-flow/velocity.png" alt="Velocity magnitude"> --><div class="slot"><div><strong>Velocity magnitude</strong></div></div></figure><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/channel-flow/streamlines.png" alt="Streamlines"> --><div class="slot"><div><strong>Streamlines</strong></div></div></figure></div>
+      <figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/channel-flow/convergence.png" alt="Convergence history"> --><div class="slot"><div><strong>Convergence history</strong>residuals and monitors</div></div></figure>
+    </section>
+    <section><h2 id="comparison">Comparison with reference data</h2><p>For fully developed flow between plates a distance H apart:</p><span class="eq">u(y) = 6 Ū (y/H)(1 − y/H),&emsp; u<sub>max</sub> = 1.5 Ū,&emsp; dp/dx = −12 μ Ū / H²,&emsp; f·Re<sub>Dh</sub> = 96</span><div class="table-scroll"><table><caption>Fully developed profile (symmetric about y/H = 0.5)</caption><thead><tr><th class="num" scope="col">y / H</th><th class="num" scope="col">Exact u / Ū</th><th class="num" scope="col">TakiCFD</th></tr></thead><tbody><tr><td class="num">0.0</td><td class="num">0.00</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td class="num">0.1</td><td class="num">0.54</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td class="num">0.2</td><td class="num">0.96</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td class="num">0.3</td><td class="num">1.26</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td class="num">0.4</td><td class="num">1.44</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td class="num">0.5</td><td class="num">1.50</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr></tbody></table></div><div class="table-scroll"><table><caption>Integral quantities</caption><thead><tr><th scope="col">Quantity</th><th class="num" scope="col">Exact</th><th class="num" scope="col">TakiCFD</th><th class="num" scope="col">Error</th></tr></thead><tbody><tr><td>u<sub>max</sub> / Ū</td><td class="num">1.5</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Darcy friction factor × Re<sub>Dh</sub></td><td class="num">96</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr></tbody></table></div><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/channel-flow/profile.png" alt="Velocity profile at the outlet"> --><div class="slot"><div><strong>Velocity profile at the outlet</strong>TakiCFD against the parabola, on three meshes</div></div></figure></section>
+    <section><h2 id="report">Report</h2>
+      <p>The full write-up of this case — set-up, mesh study, results and discussion — will be available as a PDF.</p>
+      <!-- When the PDF is ready: put it in /reports/ and replace the span below with
+           <a class="btn btn-line" href="../reports/channel-flow.pdf">Download the report (PDF)</a> -->
+      <span class="btn btn-line" aria-disabled="true" style="opacity:.55;cursor:default">Report (PDF) coming soon</span>
+    </section>
+    <section><h2 id="references">References</h2><ol><li>F. M. White. <i>Viscous Fluid Flow</i>, 3rd ed., section 3-3 (Poiseuille flow). McGraw-Hill, 2006.</li><li>R. K. Shah, A. L. London. <i>Laminar Flow Forced Convection in Ducts</i>. Academic Press, 1978.</li></ol><nav class="next-prev" aria-label="Other cases"><a href="heat-exchanger.html"><span>Previous case</span>Counter-flow heat exchanger</a><span></span></nav></section>
+  </article>
+</div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <strong style="color:#fff">TakiCFD</strong> — a 2-D and 3-D finite-volume CFD workbench.<br>
+      © <span data-year>2026</span> [Your name]. All rights reserved.
+    </div>
+    <nav aria-label="Footer"><a href="../index.html">Home</a><a href="../docs.html">Documentation</a><a href="../cases/index.html">Case studies</a><a href="../about.html">About</a></nav>
+  </div>
+</footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
