@@ -229,3 +229,9 @@ td.pending { color: #a3b0c0; text-align: right; }
 .cta h2 { color: #fff; }
 .cta .lead { color: #c3d3e6; }
 section.cta + footer { border-top: 1px solid rgba(255,255,255,.08); }
+
+/* folded point-by-point tables */
+details.points { max-width: 52rem; margin: 8px 0 16px; border: 1px solid var(--line); border-radius: var(--r-m); background: var(--surface); padding: 0 16px; }
+details.points summary { cursor: pointer; padding: 12px 0; font-weight: 600; color: var(--flow); }
+details.points[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+.figure img { width: 100%; height: auto; }

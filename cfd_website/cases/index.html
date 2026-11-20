@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case studies — Altyra</title>
-<meta name="description" content="Validation of Altyra against benchmark and experimental data.">
+<title>Case studies — Torvex Lab</title>
+<meta name="description" content="Validation of Torvex Lab against benchmark and experimental data.">
 <link rel="icon" href="../assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=dc98a61c">
+<link rel="stylesheet" href="../assets/css/style.css?v=45639d66">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="../index.html"><img src="../assets/img/logo.png" alt="" width="34" height="34"><span class="brand-text"><span class="brand-name">Altyra</span><span class="brand-tag">Flow &amp; heat-transfer simulation</span></span></a>
+    <a class="brand" href="../index.html"><img src="../assets/img/logo.png" alt="" width="34" height="34"><span class="brand-text"><span class="brand-name">Torvex Lab</span><span class="brand-tag">Flow &amp; heat-transfer simulation</span></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main"><a href="../index.html">Home</a><a href="../docs.html">Documentation</a><a href="../cases/index.html" aria-current="page">Case studies</a><a href="../about.html">About</a></nav>
   </div>
@@ -22,7 +22,7 @@
 
 <div class="page-head"><div class="wrap">
   <h1>Case studies</h1>
-  <p class="lead">Before a simulation can guide a design, it has to reproduce problems whose answer is known. Each study gives the geometry, mesh, boundary conditions and settings, and compares Altyra with experiments, published benchmarks or exact solutions.</p>
+  <p class="lead">Before a simulation can guide a design, it has to reproduce problems whose answer is known. Each study gives the geometry, mesh, boundary conditions and settings, and compares Torvex Lab with experiments, published benchmarks or exact solutions.</p>
 </div></div>
 <section style="padding-top:24px"><div class="wrap"><ul class="case-list"><li><a class="case-item" href="lid-driven-cavity.html"><svg viewBox="20 20 460 300" role="img" aria-label="Lid-driven cavity: square box of side L, top lid moving at speed U, other walls no-slip" xmlns="http://www.w3.org/2000/svg"><defs>
 <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
@@ -33,9 +33,12 @@
 </defs><rect x="150" y="60" width="200" height="200" fill="#fff" stroke="#0f2238" stroke-width="2.5"/>
 <rect x="142" y="60" width="8" height="208" fill="url(#hatch)"/><rect x="350" y="60" width="8" height="208" fill="url(#hatch)"/><rect x="150" y="260" width="200" height="8" fill="url(#hatch)"/>
 <line x1="150" y1="52" x2="350" y2="52" stroke="#1268b3" stroke-width="3" marker-end="url(#ab)"/>
-<path d="M250 70 C 330 80, 330 240, 250 250 C 170 240, 170 80, 250 70" fill="none" stroke="#1268b3" stroke-opacity=".35" stroke-width="1.5" marker-end="url(#ab)"/>
+<path d="M196 118 A 64 64 0 1 1 196 202" fill="none" stroke="#1268b3" stroke-opacity=".55" stroke-width="1.8" marker-end="url(#ab)"/>
+<path d="M232 140 A 30 30 0 1 1 232 178" fill="none" stroke="#1268b3" stroke-opacity=".35" stroke-width="1.4"/>
+<path d="M170 252 A 14 14 0 1 0 156 238" fill="none" stroke="#d9581a" stroke-opacity=".7" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M330 252 A 16 16 0 1 1 344 236" fill="none" stroke="#d9581a" stroke-opacity=".7" stroke-width="1.4" marker-end="url(#ah)"/>
 <line x1="250" y1="60" x2="250" y2="260" stroke="#44556c" stroke-dasharray="4 4"/><line x1="150" y1="160" x2="350" y2="160" stroke="#44556c" stroke-dasharray="4 4"/>
-</svg><div><h3>Lid-driven cavity</h3><p>The reference test of every flow solver: a box whose lid slides and drives one large vortex. If a code fails here, no design result can be trusted.</p><span class="ref">Compared with: Ghia, Ghia & Shin (1982)</span></div></a></li><li><a class="case-item" href="flow-over-cylinder.html"><svg viewBox="0 20 530 270" role="img" aria-label="Flow over a cylinder of diameter D in a rectangular domain with inlet, outlet and slip side walls" xmlns="http://www.w3.org/2000/svg"><defs>
+</svg><div><h3>Lid-driven cavity</h3><p>The reference test of every flow solver: a box whose lid slides and drives one large vortex. If a code fails here, no design result can be trusted.</p><span class="ref">Compared with: Ghia, Ghia & Shin (1982), Re = 100 and 1000</span> <span class="status done">Validated</span></div></a></li><li><a class="case-item" href="flow-over-cylinder.html"><svg viewBox="0 20 530 270" role="img" aria-label="Flow over a cylinder of diameter D in a rectangular domain with inlet, outlet and slip side walls" xmlns="http://www.w3.org/2000/svg"><defs>
 <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
 <pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
 <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
@@ -45,7 +48,7 @@
 <circle cx="150" cy="140" r="18" fill="url(#hatch)" stroke="#0f2238" stroke-width="2"/>
 <line x1="14" y1="66" x2="36" y2="66" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="92" x2="36" y2="92" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="118" x2="36" y2="118" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="144" x2="36" y2="144" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="170" x2="36" y2="170" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="196" x2="36" y2="196" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/><line x1="14" y1="222" x2="36" y2="222" stroke="#1268b3" stroke-width="2" marker-end="url(#ab)"/>
 <path d="M170 132 C 230 110, 260 170, 320 140 S 410 110, 470 140" fill="none" stroke="#1268b3" stroke-opacity=".35" stroke-width="1.5"/>
-</svg><div><h3>Flow over a cylinder</h3><p>Wake, drag and vortex shedding behind a cylinder — the mechanism behind loads and vibration on tubes, cables, chimneys and offshore risers.</p><span class="ref">Compared with: Dennis & Chang (1970), Williamson (1996)</span></div></a></li><li><a class="case-item" href="heat-exchanger.html"><svg viewBox="0 20 600 260" role="img" aria-label="Counter-flow heat exchanger: hot channel on top, cold channel below, separated by a conducting solid wall" xmlns="http://www.w3.org/2000/svg"><defs>
+</svg><div><h3>Flow over a cylinder</h3><p>Wake, drag and vortex shedding behind a cylinder — the mechanism behind loads and vibration on tubes, cables, chimneys and offshore risers.</p><span class="ref">Compared with: Dennis & Chang (1970), Coutanceau & Bouard (1977)</span> <span class="status done">Validated</span></div></a></li><li><a class="case-item" href="heat-exchanger.html"><svg viewBox="0 20 600 260" role="img" aria-label="Counter-flow heat exchanger: hot channel on top, cold channel below, separated by a conducting solid wall" xmlns="http://www.w3.org/2000/svg"><defs>
 <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
 <pattern id="solid" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#e8ecf1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#8a97a8" stroke-width="1"/></pattern>
 <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1268b3"/></marker>
@@ -72,13 +75,13 @@
 <polyline points="410.0,80.0 423.3,84.5 435.2,89.0 445.7,93.5 454.8,98.0 462.5,102.5 468.8,107.0 473.7,111.5 477.2,116.0 479.3,120.5 480.0,125.0 479.3,129.5 477.2,134.0 473.7,138.5 468.8,143.0 462.5,147.5 454.8,152.0 445.7,156.5 435.2,161.0 423.3,165.5 410.0,170.0" fill="none" stroke="#1268b3" stroke-width="2.2"/>
 <line x1="410" y1="98.0" x2="451.8" y2="98.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="111.5" x2="470.7" y2="111.5" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="125.0" x2="477.0" y2="125.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="138.5" x2="470.7" y2="138.5" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/><line x1="410" y1="152.0" x2="451.8" y2="152.0" stroke="#1268b3" stroke-width="1.2" marker-end="url(#ab)"/>
 <path d="M60 80 Q 200 125 260 125 Q 200 125 60 170" fill="none" stroke="#44556c" stroke-dasharray="4 4"/>
-</svg><div><h3>Laminar channel flow</h3><p>Velocity profile and pressure drop in a channel, against the exact solution — the basis of every pressure-loss estimate in ducts and cooling passages.</p><span class="ref">Compared with: Analytic (Poiseuille)</span></div></a></li></ul></div></section>
+</svg><div><h3>Laminar channel flow</h3><p>Velocity profile and pressure drop in a channel, against the exact solution — the basis of every pressure-loss estimate in ducts and cooling passages.</p><span class="ref">Compared with: Exact solution (Poiseuille), Chen (1973)</span> <span class="status done">Validated</span></div></a></li></ul></div></section>
 
 </main>
 <footer class="site-foot">
   <div class="wrap">
     <div>
-      <strong style="color:#fff">Altyra</strong> — flow &amp; heat-transfer simulation for engineering design.<br>
+      <strong style="color:#fff">Torvex Lab</strong> — flow &amp; heat-transfer simulation for engineering design.<br>
       © 2026 Taki Eddine Goumri.
     </div>
     <nav aria-label="Footer"><a href="../index.html">Home</a><a href="../docs.html">Documentation</a><a href="../cases/index.html">Case studies</a><a href="../about.html">About</a></nav>

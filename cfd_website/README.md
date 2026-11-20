@@ -1,4 +1,4 @@
-# Altyra website
+# Torvex Lab website
 
 A static website: plain HTML, CSS and JavaScript. There is no framework and no build step, so any static host can serve
 this folder as it is.
