@@ -41,7 +41,7 @@
     W = cv.clientWidth; H = cv.clientHeight;
     cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     R = Math.max(26, Math.min(W, H) * 0.075);
-    cx = W > 760 ? W * 0.58 : W * 0.35; cy = H * 0.5;
+    cx = W > 760 ? W * 0.64 : W * 0.35; cy = H * 0.5;
     U = Math.max(40, W * 0.07);                     // free-stream speed, px/s
     var n = Math.round(Math.min(1500, W * H / 900));
     parts = []; for (var i = 0; i < n; i++) parts.push(spawn(true));

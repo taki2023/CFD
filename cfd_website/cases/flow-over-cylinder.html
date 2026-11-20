@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Flow over a cylinder — TakiCFD case study</title>
-<meta name="description" content="A steady wake with two attached vortices at Re = 20 and 40, and periodic vortex shedding at Re = 100.">
+<title>Flow over a cylinder — Altyra case study</title>
+<meta name="description" content="Wake, drag and vortex shedding behind a cylinder — the mechanism behind loads and vibration on tubes, cables, chimneys and offshore risers.">
 <link rel="icon" href="../assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=8c1d5198">
+<link rel="stylesheet" href="../assets/css/style.css?v=dc98a61c">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="../index.html"><img src="../assets/img/logo.png" alt="" width="34" height="34">TakiCFD</a>
+    <a class="brand" href="../index.html"><img src="../assets/img/logo.png" alt="" width="34" height="34"><span class="brand-text"><span class="brand-name">Altyra</span><span class="brand-tag">Flow &amp; heat-transfer simulation</span></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main"><a href="../index.html">Home</a><a href="../docs.html">Documentation</a><a href="../cases/index.html" aria-current="page">Case studies</a><a href="../about.html">About</a></nav>
   </div>
@@ -23,7 +23,7 @@
 <div class="page-head"><div class="wrap">
   <div class="crumbs"><a href="index.html">Case studies</a> / Flow over a cylinder</div>
   <h1>Flow over a cylinder</h1>
-  <p class="lead">A steady wake with two attached vortices at Re = 20 and 40, and periodic vortex shedding at Re = 100.</p>
+  <p class="lead">Wake, drag and vortex shedding behind a cylinder — the mechanism behind loads and vibration on tubes, cables, chimneys and offshore risers.</p>
   <span class="status">Results in preparation</span>
   <dl class="params"><div><dt>Reynolds numbers</dt><dd>Re = U∞D/ν = 20, 40, 100</dd></div><div><dt>Flow</dt><dd>Laminar; steady (20, 40) and transient (100)</dd></div><div><dt>Dimension</dt><dd>2-D</dd></div><div><dt>Reference</dt><dd>Dennis & Chang 1970; Liu et al. 1998</dd></div></dl>
 </div></div>
@@ -38,7 +38,10 @@ Below about Re = 47 the flow is steady: two symmetric vortices sit behind the cy
 becomes unstable and sheds vortices alternately from the top and bottom — the Kármán vortex street — at a frequency given by the
 Strouhal number <span class="math">St = fD/U∞</span>.</p>
 <p>The case tests curved walls, the wake and, at Re = 100, time accuracy. Drag, the length of the recirculation zone and the
-shedding frequency are compared with published data.</p></section>
+shedding frequency are compared with published data.</p>
+<p><strong>Why it matters for design:</strong> when the shedding frequency approaches a natural frequency of the structure, it can
+vibrate and fail by fatigue — a known risk for heat-exchanger tube bundles, cables, chimneys and risers. Predicting the frequency and the
+force is the first step of a vibration check.</p></section>
     <section><h2 id="geometry">Geometry and boundary conditions</h2>
       <figure class="figure"><svg viewBox="0 20 530 270" role="img" aria-label="Flow over a cylinder of diameter D in a rectangular domain with inlet, outlet and slip side walls" xmlns="http://www.w3.org/2000/svg"><defs>
 <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0f2238" stroke-width="1.4"/></pattern>
@@ -59,19 +62,19 @@ shedding frequency are compared with published data.</p></section>
 <line x1="40" y1="262" x2="150" y2="262" stroke="#44556c" marker-start="url(#ak)" marker-end="url(#ak)"/><text x="95" y="280" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">L_u</text>
 <line x1="150" y1="262" x2="480" y2="262" stroke="#44556c" marker-start="url(#ak)" marker-end="url(#ak)"/><text x="315" y="280" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">L_d</text>
 <line x1="496" y1="50" x2="496" y2="230" stroke="#44556c" marker-start="url(#ak)" marker-end="url(#ak)"/><text x="504" y="144" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#44556c">H</text></g></svg><figcaption>Computational domain and boundary conditions (schematic, not to scale).</figcaption></figure>
-      <div class="table-scroll"><table><caption>Boundary conditions</caption><thead><tr><th scope="col">Boundary</th><th scope="col">Type in TakiCFD</th><th scope="col">Condition</th></tr></thead><tbody><tr><td>Inlet (left)</td><td>Velocity inlet</td><td>u = U∞, v = 0</td></tr><tr><td>Outlet (right)</td><td>Pressure outlet</td><td>p = 0</td></tr><tr><td>Top and bottom</td><td>Slip wall / symmetry</td><td>v = 0, ∂u/∂y = 0</td></tr><tr><td>Cylinder</td><td>Wall</td><td>No-slip: u = v = 0</td></tr></tbody></table></div>
+      <div class="table-scroll"><table><caption>Boundary conditions</caption><thead><tr><th scope="col">Boundary</th><th scope="col">Type in Altyra</th><th scope="col">Condition</th></tr></thead><tbody><tr><td>Inlet (left)</td><td>Velocity inlet</td><td>u = U∞, v = 0</td></tr><tr><td>Outlet (right)</td><td>Pressure outlet</td><td>p = 0</td></tr><tr><td>Top and bottom</td><td>Slip wall / symmetry</td><td>v = 0, ∂u/∂y = 0</td></tr><tr><td>Cylinder</td><td>Wall</td><td>No-slip: u = v = 0</td></tr></tbody></table></div>
     </section>
     <section><h2 id="mesh">Mesh</h2><p>A fine ring of quadrilateral (inflation) layers around the cylinder resolves the boundary layer; the cells grow towards the far field, with a refined band in the wake.</p>
       <div class="slots"><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/mesh.png" alt="Full mesh"> --><div class="slot"><div><strong>Full mesh</strong></div></div></figure><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/mesh-zoom.png" alt="Close-up"> --><div class="slot"><div><strong>Close-up</strong></div></div></figure></div>
-      <div class="table-scroll"><table><caption>Mesh statistics</caption><thead><tr><th scope="col">Mesh</th><th scope="col">Cells</th><th scope="col">Min. size</th><th scope="col">Max. aspect ratio</th></tr></thead><tbody><tr><td>Coarse</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Medium</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Fine</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr></tbody></table></div>
+      <div class="table-scroll"><table><caption>Mesh statistics</caption><thead><tr><th scope="col">Mesh</th><th scope="col">Cells</th><th scope="col">Min. size</th><th scope="col">Max. aspect ratio</th></tr></thead><tbody><tr><td>Coarse</td><td class="pending" title="To be filled with the Altyra result">—</td><td class="pending" title="To be filled with the Altyra result">—</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Medium</td><td class="pending" title="To be filled with the Altyra result">—</td><td class="pending" title="To be filled with the Altyra result">—</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Fine</td><td class="pending" title="To be filled with the Altyra result">—</td><td class="pending" title="To be filled with the Altyra result">—</td><td class="pending" title="To be filled with the Altyra result">—</td></tr></tbody></table></div>
     </section>
     <section><h2 id="setup">Solver set-up</h2><dl class="caps"><div><dt>Solver</dt><dd>Pressure-based SIMPLE (steady) and PISO / PIMPLE (transient)</dd></div><div><dt>Domain</dt><dd>L_u, L_d and H large enough for blockage to be small — to be stated with the results</dd></div><div><dt>Time step (Re = 100)</dt><dd>To be stated with the results (CFL-based)</dd></div><div><dt>Monitors</dt><dd>Drag and lift coefficients on the cylinder</dd></div></dl></section>
     <section><h2 id="results">Results</h2>
-      <p class="muted">Contours, streamlines and convergence history from TakiCFD will appear here.</p>
+      <p class="muted">Contours, streamlines and convergence history from Altyra will appear here.</p>
       <div class="slots"><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/velocity.png" alt="Velocity magnitude"> --><div class="slot"><div><strong>Velocity magnitude</strong></div></div></figure><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/streamlines.png" alt="Streamlines"> --><div class="slot"><div><strong>Streamlines</strong></div></div></figure></div>
       <figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/convergence.png" alt="Convergence history"> --><div class="slot"><div><strong>Convergence history</strong>residuals and monitors</div></div></figure>
     </section>
-    <section><h2 id="comparison">Comparison with reference data</h2><div class="table-scroll"><table><caption>Steady wake, Re = 20 and 40</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Re</th><th scope="col">Reference</th><th class="num" scope="col">TakiCFD</th></tr></thead><tbody><tr><td>Drag coefficient C<sub>D</sub></td><td>20</td><td>2.045 (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Recirculation length L<sub>w</sub>/D</td><td>20</td><td>0.94 (Dennis &amp; Chang 1970); 0.93 (Coutanceau &amp; Bouard 1977, exp.)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Separation angle θ<sub>s</sub></td><td>20</td><td>43.7° (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Drag coefficient C<sub>D</sub></td><td>40</td><td>1.522 (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Recirculation length L<sub>w</sub>/D</td><td>40</td><td>2.345 (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Separation angle θ<sub>s</sub></td><td>40</td><td>53.8° (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr></tbody></table></div><div class="table-scroll"><table><caption>Vortex shedding, Re = 100</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Reference</th><th class="num" scope="col">TakiCFD</th></tr></thead><tbody><tr><td>Strouhal number St</td><td>0.164 (Williamson 1996, exp.; Liu et al. 1998)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Mean drag coefficient C<sub>D</sub></td><td>1.350 ± 0.012 (Liu et al. 1998)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr><tr><td>Lift coefficient amplitude C<sub>L</sub></td><td>± 0.339 (Liu et al. 1998)</td><td class="pending" title="To be filled with the TakiCFD result">—</td></tr></tbody></table></div><p class="muted">The reference values are for an unconfined cylinder; a narrow domain raises the drag and the Strouhal number, so the domain size is part of the result.</p><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/forces.png" alt="Lift and drag coefficients against time, Re = 100"> --><div class="slot"><div><strong>Lift and drag coefficients against time, Re = 100</strong>with the FFT of C<sub>L</sub> giving St</div></div></figure></section>
+    <section><h2 id="comparison">Comparison with reference data</h2><div class="table-scroll"><table><caption>Steady wake, Re = 20 and 40</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Re</th><th scope="col">Reference</th><th class="num" scope="col">Altyra</th></tr></thead><tbody><tr><td>Drag coefficient C<sub>D</sub></td><td>20</td><td>2.045 (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Recirculation length L<sub>w</sub>/D</td><td>20</td><td>0.94 (Dennis &amp; Chang 1970); 0.93 (Coutanceau &amp; Bouard 1977, exp.)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Separation angle θ<sub>s</sub></td><td>20</td><td>43.7° (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Drag coefficient C<sub>D</sub></td><td>40</td><td>1.522 (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Recirculation length L<sub>w</sub>/D</td><td>40</td><td>2.345 (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Separation angle θ<sub>s</sub></td><td>40</td><td>53.8° (Dennis &amp; Chang 1970)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr></tbody></table></div><div class="table-scroll"><table><caption>Vortex shedding, Re = 100</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Reference</th><th class="num" scope="col">Altyra</th></tr></thead><tbody><tr><td>Strouhal number St</td><td>0.164 (Williamson 1996, exp.; Liu et al. 1998)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Mean drag coefficient C<sub>D</sub></td><td>1.350 ± 0.012 (Liu et al. 1998)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr><tr><td>Lift coefficient amplitude C<sub>L</sub></td><td>± 0.339 (Liu et al. 1998)</td><td class="pending" title="To be filled with the Altyra result">—</td></tr></tbody></table></div><p class="muted">The reference values are for an unconfined cylinder; a narrow domain raises the drag and the Strouhal number, so the domain size is part of the result.</p><figure class="figure"><!-- Replace this slot with: <img src="../assets/cases/flow-over-cylinder/forces.png" alt="Lift and drag coefficients against time, Re = 100"> --><div class="slot"><div><strong>Lift and drag coefficients against time, Re = 100</strong>with the FFT of C<sub>L</sub> giving St</div></div></figure></section>
     <section><h2 id="report">Report</h2>
       <p>The full write-up of this case — set-up, mesh study, results and discussion — will be available as a PDF.</p>
       <!-- When the PDF is ready: put it in /reports/ and replace the span below with
@@ -85,12 +88,12 @@ shedding frequency are compared with published data.</p></section>
 <footer class="site-foot">
   <div class="wrap">
     <div>
-      <strong style="color:#fff">TakiCFD</strong> — a 2-D and 3-D finite-volume CFD workbench.<br>
+      <strong style="color:#fff">Altyra</strong> — flow &amp; heat-transfer simulation for engineering design.<br>
       © 2026 Taki Eddine Goumri.
     </div>
     <nav aria-label="Footer"><a href="../index.html">Home</a><a href="../docs.html">Documentation</a><a href="../cases/index.html">Case studies</a><a href="../about.html">About</a></nav>
   </div>
 </footer>
-<script src="../assets/js/main.js?v=838d63b7" defer></script>
+<script src="../assets/js/main.js?v=8390b891" defer></script>
 </body>
 </html>
